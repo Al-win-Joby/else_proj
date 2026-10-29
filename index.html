@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Class Election</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand">Class Election</span>
+    <span class="tagline">Democracy in action</span>
+    <button id="btn-end" class="teacher-btn">End Voting</button>
+  </header>
+
+  <main>
+    <!-- 1. Setup -->
+    <section id="screen-setup" class="screen active">
+      <h1>Election Setup</h1>
+      <p class="sub">Enter the two candidates and choose an election symbol for each.</p>
+      <div class="cards">
+        <div class="panel" id="setup-0">
+          <h2>Candidate 1</h2>
+          <label for="name-0">Name</label>
+          <input type="text" id="name-0" placeholder="Student name" maxlength="20" autocomplete="off">
+          <label>Election symbol</label>
+          <div class="symbols" id="symbols-0"></div>
+        </div>
+        <div class="panel" id="setup-1">
+          <h2>Candidate 2</h2>
+          <label for="name-1">Name</label>
+          <input type="text" id="name-1" placeholder="Student name" maxlength="20" autocomplete="off">
+          <label>Election symbol</label>
+          <div class="symbols" id="symbols-1"></div>
+        </div>
+      </div>
+      <p id="setup-error" class="error" role="alert"></p>
+      <button id="btn-start" class="btn">Start Voting</button>
+    </section>
+
+    <!-- 2. Voting -->
+    <section id="screen-vote" class="screen">
+      <h1>Cast Your Vote</h1>
+      <p class="sub">Select the candidate you support. Your vote is secret.</p>
+      <div class="cards">
+        <button class="cand-card" id="cand-0"></button>
+        <button class="cand-card" id="cand-1"></button>
+      </div>
+      <p class="counter">Votes cast: <strong id="count">0</strong></p>
+      <div id="thanks" class="thanks" aria-live="polite">
+        <div class="tick">&#10003;</div>
+        <div>Your vote has been recorded</div>
+      </div>
+    </section>
+
+    <!-- 3. Result -->
+    <section id="screen-result" class="screen">
+      <h1 id="result-title">Election Result</h1>
+      <div id="winner" class="winner"></div>
+      <div id="bars" class="bars"></div>
+      <p class="sub" id="result-note">The candidate with the most votes wins.</p>
+      <div class="row">
+        <button id="btn-revote" class="btn alt" hidden>Vote Again</button>
+        <button id="btn-new" class="btn">New Election</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="confirm">
+    <p>End the voting now?<br><small>Make sure every student has voted.</small></p>
+    <div class="row">
+      <button id="confirm-no" class="btn alt">Not yet</button>
+      <button id="confirm-yes" class="btn">Yes, show result</button>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

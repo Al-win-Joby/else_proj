@@ -1,0 +1,133 @@
+:root {
+  --bg: #f3f5f9;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --navy: #14213d;
+  --c0: #1d4ed8;
+  --c1: #b91c1c;
+  --ok: #15803d;
+  --line: #d9dee7;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  background: var(--navy); color: #fff; padding: 14px 32px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 4px solid #fca311;
+}
+.brand { font-size: 1.4rem; font-weight: 700; letter-spacing: .5px; }
+.tagline { opacity: .75; font-size: .95rem; }
+
+main { width: 100%; max-width: 1000px; margin: auto; padding: 32px 24px; }
+.screen { display: none; text-align: center; }
+.screen.active { display: block; animation: fade .3s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 8px; color: var(--navy); }
+.sub { font-size: 1.15rem; margin: 0 0 28px; color: var(--muted); }
+.error { color: #b91c1c; font-weight: 600; min-height: 1.5em; }
+
+.cards { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+
+.panel {
+  flex: 1 1 320px; max-width: 460px; background: #fff; border: 1px solid var(--line);
+  border-radius: 12px; padding: 24px; text-align: left; border-top: 6px solid var(--c0);
+  box-shadow: 0 2px 8px rgba(20, 33, 61, .08);
+}
+#setup-1 { border-top-color: var(--c1); }
+.panel h2 { margin: 0 0 16px; color: var(--navy); }
+.panel label { display: block; font-size: .9rem; font-weight: 600; color: var(--muted); margin: 12px 0 6px; text-transform: uppercase; letter-spacing: .5px; }
+.panel input {
+  width: 100%; font-size: 1.3rem; padding: 10px 14px; border: 2px solid var(--line);
+  border-radius: 8px; font-family: inherit;
+}
+.panel input:focus { outline: none; border-color: var(--navy); }
+
+.symbols { display: flex; gap: 12px; }
+.symbols button {
+  flex: 1; background: #fff; border: 2px solid var(--line); border-radius: 10px;
+  padding: 12px; cursor: pointer; transition: border-color .15s, background .15s;
+}
+.symbols button:hover { border-color: var(--navy); }
+.symbols button.selected { border-color: var(--navy); background: #eef2fb; box-shadow: 0 0 0 2px var(--navy) inset; }
+
+/* Election symbol image */
+.badge { display: inline-block; width: 4rem; height: 4rem; object-fit: contain; vertical-align: middle; }
+.badge.xl { width: 9rem; height: 9rem; }
+.badge.sm { width: 2.2rem; height: 2.2rem; }
+
+.btn {
+  font-family: inherit; font-size: 1.2rem; font-weight: 600; color: #fff;
+  background: var(--navy); border: none; border-radius: 8px; padding: 14px 36px;
+  cursor: pointer; transition: background .15s;
+}
+.btn:hover { background: #22345f; }
+.btn.alt { background: #fff; color: var(--navy); border: 2px solid var(--navy); }
+.btn.alt:hover { background: #eef2fb; }
+.row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+
+.cand-card {
+  flex: 1 1 320px; max-width: 440px; font-family: inherit; background: #fff; color: var(--ink);
+  border: 1px solid var(--line); border-top: 8px solid var(--c0); border-radius: 12px;
+  padding: 32px 24px; cursor: pointer; box-shadow: 0 2px 8px rgba(20, 33, 61, .08);
+  transition: transform .12s, box-shadow .12s;
+}
+#cand-1 { border-top-color: var(--c1); }
+.cand-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(20, 33, 61, .15); }
+.cand-card:active { transform: translateY(0); }
+.cand-card .nm { display: block; font-size: 2rem; font-weight: 700; margin: 20px 0; word-break: break-word; color: var(--navy); }
+.cand-card .go {
+  display: inline-block; background: var(--c0); color: #fff; font-size: 1.2rem;
+  font-weight: 700; border-radius: 8px; padding: 12px 48px; letter-spacing: 1px;
+}
+#cand-1 .go { background: var(--c1); }
+
+.counter { font-size: 1.2rem; margin: 28px 0 12px; color: var(--muted); }
+.teacher-btn {
+  display: none; font-family: inherit; background: transparent; border: 1px solid rgba(255, 255, 255, .6);
+  color: #fff; border-radius: 6px; padding: 8px 16px; font-size: .95rem; font-weight: 600; cursor: pointer;
+}
+.teacher-btn:hover { background: rgba(255, 255, 255, .15); border-color: #fff; }
+body[data-screen="vote"] .teacher-btn { display: inline-block; }
+body[data-screen="vote"] .tagline { display: none; }
+
+.thanks {
+  position: fixed; inset: 0; display: none; flex-direction: column; align-items: center;
+  justify-content: center; gap: 12px; background: var(--ok); color: #fff;
+  font-size: clamp(1.6rem, 5vw, 3rem); font-weight: 700; z-index: 10;
+}
+.thanks.show { display: flex; animation: fade .2s ease; }
+.thanks .tick { font-size: 6rem; line-height: 1; }
+
+.winner {
+  display: inline-block; background: #fff; border: 1px solid var(--line); border-top: 8px solid #fca311;
+  border-radius: 12px; padding: 32px 64px; box-shadow: 0 4px 16px rgba(20, 33, 61, .12); margin: 8px 0 28px;
+}
+.winner .label { display: block; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin-bottom: 16px; }
+.winner .nm { display: block; font-size: 2.6rem; font-weight: 800; color: var(--navy); margin-top: 16px; }
+.bars { max-width: 620px; margin: 0 auto 20px; text-align: left; }
+.bar-row { display: flex; align-items: center; gap: 12px; margin: 12px 0; font-size: 1.2rem; font-weight: 600; }
+.bar-label { width: 210px; flex: none; display: flex; align-items: center; gap: 10px; overflow: hidden; white-space: nowrap; }
+.bar-label span { overflow: hidden; text-overflow: ellipsis; }
+.bar-track { flex: 1; background: #e5e9f0; border-radius: 6px; height: 32px; overflow: hidden; }
+.bar-fill { height: 100%; width: 0; transition: width 1s ease; }
+.bar-num { width: 40px; text-align: right; }
+
+dialog { border: none; border-radius: 12px; padding: 28px; text-align: center; font-size: 1.3rem; box-shadow: 0 12px 40px rgba(0, 0, 0, .35); }
+dialog::backdrop { background: rgba(0, 0, 0, .5); }
+dialog small { font-size: 1rem; color: var(--muted); }
+
+@media (max-width: 600px) {
+  .topbar { padding: 12px 16px; }
+  .tagline { display: none; }
+  .bar-label { width: 120px; }
+  .winner { padding: 24px 28px; }
+}
